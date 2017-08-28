@@ -6,9 +6,13 @@
  * Mount Phase:
  *      Initial render:
  *      1) constructor()
- *      2) componentwillMount()
+ *          - Component lifecycle begins during constructor instantiation
+ *      2) componentWillMount()
+ *          - componentWillMount() is invoked immediately before mounting occurs. It is called before render()
  *      3) render()
+ *          - Render return will update the DOM to the virtual DOM
  *      4) componentDidMount() 
+ *          - When the instance is rendered into DOM for the first time
  *          - right place for timers, ajax
  * 
  * Update Phase:
@@ -34,9 +38,31 @@ import ReactDOM from 'react-dom';
 
 export class ComponentLifecycle extends React.Component {
 
-    render(){
+    //  Initial render: Mount phase
+
+    // Component lifecycle begins - During constructor() instantiation 
+    constructor() {
+        super();
+        console.log("ComponentLifecycle(Mount Phase) => initial Render methods:");
+        console.log("ComponentLifecycle - Constructor method executed");
+    }
+
+    // componentWillMount() is invoked immediately before mounting occurs.
+    componentWillMount() {
+        console.log("ComponentLifecycle - componentWillMount executed");
+    }
+
+    // Render return will update the DOM to the virtual DOM
+    render() {
+        console.log("ComponentLifecycle - render method executed");
         return <div>Hello ComponentLifecycle</div>;
     }
-} 
 
-ReactDOM.render(<ComponentLifecycle/>, document.getElementById('root'));
+    // When the instance is rendered into DOM for the first time
+    componentDidMount() {
+        console.log("ComponentLifecycle - componentDidMount executed");
+    }
+
+}
+
+ReactDOM.render(<ComponentLifecycle />, document.getElementById('root'));
